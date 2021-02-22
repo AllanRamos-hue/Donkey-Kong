@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class PlayerController : MonoBehaviour
@@ -12,6 +13,9 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed;
     private float life;
     private bool isRoundClear;
+    
+    [Space]
+    public UnityEvent onRoundClear;
 
     [Header("Hammer")]
     public Transform hammerPoint;
@@ -30,11 +34,11 @@ public class PlayerController : MonoBehaviour
 
     [Header("ClimbingMovement")]
     public Transform ladderCheck;
-    public float distance;
     public float climbSpeed;
     public LayerMask ladderLayer;
     bool climbing;
 
+    [Header("Sounds")]
     public AudioClip jummpingMan;
     public AudioClip hammerMusic;
     public AudioClip deadSfx;
@@ -50,11 +54,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        MoveCharacter();
+        if(!isRoundClear)
+            MoveCharacter();
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Jump();        
+            if(life != 0)
+                Jump();        
         }
 
         ClimbingLadder();
@@ -80,6 +86,7 @@ public class PlayerController : MonoBehaviour
         {
             Invoke("RestartScene", 3);
             speed = 0;
+            onRoundClear.Invoke();
         }
 
         if(transform.position.y < -8)
@@ -141,13 +148,15 @@ public class PlayerController : MonoBehaviour
     {
         float x = Input.GetAxisRaw("Horizontal");
         myRigidbody.velocity = new Vector2(x * speed, myRigidbody.velocity.y);
-        myAnimator.SetFloat("MoveSpeed", Mathf.Abs(x));        
+        myAnimator.SetFloat("MoveSpeed", Mathf.Abs(x));
 
-        if (x > 0.05f)
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        else if (x < -0.05f)
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-
+        if (life != 0)
+        {
+            if (x > 0.05f)
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            else if (x < -0.05f)
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
     }
 
     void Jump()
@@ -172,27 +181,25 @@ public class PlayerController : MonoBehaviour
 
     bool IsOnLadder()
     {
-        return Physics2D.OverlapCircle(ladderCheck.position, 0.2f, ladderLayer);
+        return Physics2D.OverlapCircle(ladderCheck.position, 0.1f, ladderLayer);
     }
 
 
     void ClimbingLadder()
     {
-        Debug.Log(climbing);
         float y;
 
         if(IsOnLadder())
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             {
                 climbing = true;
                 myAnimator.SetBool("Climb", true);
             }
             else
-            if (Input.GetKeyUp(KeyCode.UpArrow))
+            if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W))
             {
                 climbing = false;
-
             }
         }    
 
@@ -225,7 +232,7 @@ public class PlayerController : MonoBehaviour
 
     public void RestartScene()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     private void OnDrawGizmos()
@@ -240,7 +247,7 @@ public class PlayerController : MonoBehaviour
 
         Gizmos.DrawWireSphere(hammerPoint.position, attackRange);
 
-        Gizmos.DrawWireSphere(ladderCheck.position, 0.2f);
+        Gizmos.DrawWireSphere(ladderCheck.position, 0.1f);
 
     }
 }

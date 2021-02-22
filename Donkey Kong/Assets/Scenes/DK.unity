@@ -190,7 +190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d9e4da6a01c6a438421f717b76980a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heart: {fileID: 1886747231}
 --- !u!61 &148195493
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -395,7 +394,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.87, y: 2.35}
+  m_Size: {x: 0.25, y: 2.35}
   m_EdgeRadius: 0
 --- !u!1 &365856142
 GameObject:
@@ -853,12 +852,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 596093456}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2860dbac085642d409bcb02a91f6653f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallMultiplier: 2.5
+  fallMultiplier: 2
   lowJumpMultiplier: 2
 --- !u!114 &596093458
 MonoBehaviour:
@@ -874,7 +873,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myRigidbody: {fileID: 596093460}
   speed: 4
-  jumpSpeed: 5
+  jumpSpeed: 4.5
+  onRoundClear:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1886747231}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   hammerPoint: {fileID: 624727392}
   timeHammer: 10
   enemyLayer:
@@ -887,7 +900,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   ladderCheck: {fileID: 365856143}
-  distance: 1
   climbSpeed: 2
   ladderLayer:
     serializedVersion: 2
@@ -1104,7 +1116,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.83, y: 2.35}
+  m_Size: {x: 0.25, y: 2.35}
   m_EdgeRadius: 0
 --- !u!1 &661544153
 GameObject:
@@ -1289,7 +1301,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.78, y: 2.35}
+  m_Size: {x: 0.25, y: 2.35}
   m_EdgeRadius: 0
 --- !u!1 &712707523
 GameObject:
@@ -1346,7 +1358,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.73, y: 2.35}
+  m_Size: {x: 0.25, y: 2.35}
   m_EdgeRadius: 0
 --- !u!1 &715424333
 GameObject:
@@ -1549,7 +1561,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.78, y: 2.35}
+  m_Size: {x: 0.25, y: 2.35}
   m_EdgeRadius: 0
 --- !u!1 &1062818742
 GameObject:
@@ -2065,7 +2077,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.82, y: 2.35}
+  m_Size: {x: 0.25, y: 2.35}
   m_EdgeRadius: 0
 --- !u!1 &1721109590
 GameObject:
@@ -2304,7 +2316,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.84, y: 2.35}
+  m_Size: {x: 0.25, y: 2.35}
   m_EdgeRadius: 0
 --- !u!1 &1819828982
 GameObject:
@@ -2408,7 +2420,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 2.35}
+  m_Size: {x: 0.25, y: 2.35}
   m_EdgeRadius: 0
 --- !u!1 &1869506679
 GameObject:
@@ -2772,7 +2784,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.76, y: 2.35}
+  m_Size: {x: 0.25, y: 2.35}
   m_EdgeRadius: 0
 --- !u!1 &1979502169
 GameObject:
