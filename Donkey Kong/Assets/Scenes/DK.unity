@@ -872,7 +872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRigidbody: {fileID: 596093460}
-  speed: 4
+  speed: 3
   jumpSpeed: 4.5
   onRoundClear:
     m_PersistentCalls:
